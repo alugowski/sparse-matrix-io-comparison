@@ -18,9 +18,24 @@ struct problem {
     std::filesystem::path mm_path;
 };
 
-using VT = float;
+/**
+ * row/column index type
+ */
+using INDEX_TYPE = int64_t;
+
+/**
+ * value type
+ */
+using VALUE_TYPE = double;
+
+/**
+ * default number of Google Benchmark iterations to run
+ */
 static int num_iterations = 1;
 
+/**
+ * Directory where benchmarks may write temporary data to.
+ */
 extern std::filesystem::path temporary_write_dir;
 
 void BenchmarkArgument(benchmark::internal::Benchmark* b);

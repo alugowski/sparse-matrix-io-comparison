@@ -54,7 +54,7 @@ void FMM_read(benchmark::State& state) {
 
     for ([[maybe_unused]] auto _ : state) {
         fast_matrix_market::matrix_market_header header;
-        triplet_matrix<int32_t, VT> triplet;
+        triplet_matrix<INDEX_TYPE, VALUE_TYPE> triplet;
 
         std::ifstream iss(prob.mm_path);
         fast_matrix_market::read_matrix_market_triplet(iss, header, triplet.rows, triplet.cols, triplet.vals, options);
@@ -81,13 +81,13 @@ void FMM_write(benchmark::State& state) {
     options.num_threads = (int)state.range(1);
 
     // load the problem to be written later
-    triplet_matrix<int64_t, VT> triplet;
+    triplet_matrix<INDEX_TYPE, VALUE_TYPE> triplet;
     {
         std::ifstream f(prob.mm_path);
         fast_matrix_market::read_matrix_market_triplet(f, triplet.nrows, triplet.ncols, triplet.rows, triplet.cols, triplet.vals);
     }
 
-    auto out_path = std::filesystem::temp_directory_path() / ("write_" + prob.name + ".mtx");
+    auto out_path = temporary_write_dir / ("write_" + prob.name + ".mtx");
 
     for ([[maybe_unused]] auto _ : state) {
 #define USE_OSS 0

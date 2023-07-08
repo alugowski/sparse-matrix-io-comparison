@@ -6,7 +6,7 @@ Compare I/O of sparse matrix libraries.
 * [PIGO](https://github.com/GT-TDAlab/PIGO)
   * Matrix Market read
   * proprietary binary write
-  * ASCII format write
+  * ASCII format write (benchmark disabled by default, see comment in code)
 
 Libraries are fetched from their main branches on GitHub. To pin a version modify the appropriate file in [cmake/](cmake).
 

@@ -12,6 +12,19 @@
 //#define PIGO_iterations num_iterations
 #define PIGO_iterations 1
 
+// PIGO's types
+// User warning! pigo::COO is unweighted by default!
+using pigo_COO = pigo::COO<
+    INDEX_TYPE,  // class Label=uint32_t,
+    INDEX_TYPE,  // class Ordinal=Label,
+    INDEX_TYPE*, // class Storage=Label*,
+    false,       // bool symmetric=false,
+    false,       // bool keep_upper_triangle_only=false,
+    false,       // bool remove_self_loops=false,
+    true,        // bool weighted=false,
+    VALUE_TYPE   // class Weight=float,
+>;
+
 /**
  * Read MatrixMarket with PIGO.
  */
@@ -23,7 +36,7 @@ static void PIGO_read(benchmark::State& state) {
     std::size_t num_bytes = 0;
 
     for ([[maybe_unused]] auto _ : state) {
-        pigo::COO<> c {prob.mm_path};
+        pigo_COO c {prob.mm_path};
         benchmark::DoNotOptimize(c);
 
         num_bytes += std::filesystem::file_size(prob.mm_path);
@@ -47,10 +60,10 @@ static void PIGO_write_binary(benchmark::State& state) {
 
     // load the problem to be written later
     omp_set_num_threads(0);
-    pigo::COO<> c {prob.mm_path};
+    pigo_COO c {prob.mm_path};
 
     omp_set_num_threads(num_threads);
-    auto out_path = std::filesystem::temp_directory_path() / ("write_" + prob.name + ".bin");
+    auto out_path = temporary_write_dir / ("write_" + prob.name + ".bin");
 
     for ([[maybe_unused]] auto _ : state) {
         c.save(out_path);
@@ -77,10 +90,10 @@ static void PIGO_write_ascii(benchmark::State& state) {
 
     // load the problem to be written later
     omp_set_num_threads(0);
-    pigo::COO<> c {prob.mm_path};
+    pigo_COO c {prob.mm_path};
 
     omp_set_num_threads(num_threads);
-    auto out_path = std::filesystem::temp_directory_path() / ("write_" + prob.name + ".txt");
+    auto out_path = temporary_write_dir / ("write_" + prob.name + ".txt");
 
     for ([[maybe_unused]] auto _ : state) {
         c.write(out_path);
@@ -94,4 +107,7 @@ static void PIGO_write_ascii(benchmark::State& state) {
     state.SetLabel("problem_name=" + prob.name);
 }
 
-BENCHMARK(PIGO_write_ascii)->Name("op:write/matrix:Coordinate/format:ASCII/impl:PIGO/lang:C++")->UseRealTime()->Iterations(PIGO_iterations)->Apply(BenchmarkArgument);
+// Disabled by default
+// pigo::COO::write uses std::to_string to write values. This method does not paralellize, so this
+// benchmark is very slow on large datasets.
+// BENCHMARK(PIGO_write_ascii)->Name("op:write/matrix:Coordinate/format:ASCII/impl:PIGO/lang:C++")->UseRealTime()->Iterations(PIGO_iterations)->Apply(BenchmarkArgument);
