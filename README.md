@@ -21,7 +21,7 @@ cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
 cmake --build build --config Release
 ```
 
-# Data
+# Datafiles
 
 The benchmarks look for any `*.mtx` MatrixMarket files in the current directory and benchmark against these. For benchmarks of non Matrix Market formats, the datastructure is first populated with the MM file and then written to the tested format.
 
@@ -39,10 +39,23 @@ Run all benchmarks:
 ```shell
 build/fmm
 build/pigo_bench
+build/graphblas_fmm
 ```
 
 Or use Google Benchmark's filter option to run only some benchmarks:
 ```shell
 build/fmm '--benchmark_filter=.*read.*'
 build/pigo_bench '--benchmark_filter=.*read.*'
+build/graphblas_fmm '--benchmark_filter=.*read.*'
 ```
+
+# Results
+
+The benchmarks report the end-to-end time, as that is the primary thing the end user cares about.
+This includes overheads and any datastructure construction time. For example, the GraphBLAS benchmark may include the time for `GrB_Matrix_build` in addition to the I/O time. This is intentional.
+
+In addition to the runtime in seconds each benchmark divides this time by the file size and reports an **effective read speed in bytes/second**.
+This normalized value is very informative:
+ * Directly comparable to other benchmarked files, which are almost certainly of different sizes.
+ * Shows at a glance whether performance varies by file size or not.
+ * Directly comparable to system I/O capabilities.
