@@ -27,11 +27,18 @@ The benchmarks look for any `*.mtx` MatrixMarket files in the current directory 
 
 Use any method you wish to create the `.mtx` files.
 
-One option is to use `generate_matrix_market` to generate randomized matrix market files of a specified size (in megabytes):
+### `generate_matrix_market`
+Generate randomized matrix market files of a specified size (in megabytes):
 ```shell
 build/generate_matrix_market 1024
 ```
 creates a file named `1024MiB.mtx` in the current directory that is 1 GiB in size.
+
+### `sort_matrix_market`
+Some benchmarks like GraphBLAS perform much better if the indices are sorted. Use `sort_matrix_market` to create a sorted copy of a `.mtx` file:
+```shell
+build/sort_matrix_market 1024MiB.mtx
+```
 
 # Run
 

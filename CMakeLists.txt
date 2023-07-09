@@ -6,16 +6,22 @@ include(FetchContent)
 # Add Google Benchmark
 include(cmake/GoogleBenchmark.cmake)
 
-# Generator (uses fast_matrix_market)
+# Add fast_matrix_market, used for utilities as well as benchmarks
 include(cmake/fast_matrix_market.cmake)
+
+# Generator (uses fast_matrix_market)
 add_executable(generate_matrix_market generate_matrix_market.cpp)
 target_link_libraries(generate_matrix_market fast_matrix_market::fast_matrix_market)
 
-# fast_matrix_market
+# Sorts matrix indices (uses fast_matrix_market)
+add_executable(sort_matrix_market sort_matrix_market.cpp)
+target_link_libraries(sort_matrix_market fast_matrix_market::fast_matrix_market)
+
+# fast_matrix_market benchmark
 add_executable(fmm bench_main.cpp fmm.cpp bench_common.hpp)
 target_link_libraries(fmm benchmark::benchmark fast_matrix_market::fast_matrix_market)
 
-# PIGO
+# PIGO benchmark
 include(cmake/PIGO.cmake)
 add_executable(pigo_bench bench_main.cpp pigo_bench.cpp bench_common.hpp)
 target_link_libraries(pigo_bench benchmark::benchmark fast_matrix_market::fast_matrix_market pigo)
@@ -30,7 +36,7 @@ if (GraphBLAS_FOUND)
     message("GRAPHBLAS_STATIC: ${GRAPHBLAS_STATIC}")
     message("GRAPHBLAS_LIBRARY: ${GRAPHBLAS_LIBRARY}")
 
-    # GraphBLAS fast_matrix_market bindings
+    # GraphBLAS fast_matrix_market bindings benchmark
     add_executable(graphblas_fmm bench_main.cpp graphblas_fmm.cpp bench_common.hpp)
     if (NOT ("${GRAPHBLAS_INCLUDE_DIR}" STREQUAL "" ))
         target_include_directories(graphblas_fmm PUBLIC ${GRAPHBLAS_INCLUDE_DIR})
