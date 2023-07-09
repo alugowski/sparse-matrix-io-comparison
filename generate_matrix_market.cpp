@@ -7,13 +7,13 @@
 #include <random>
 #include <fast_matrix_market/app/generator.hpp>
 
-constexpr int64_t index_max = 100000;
+constexpr int64_t index_max = 10000000;
 constexpr int64_t index_min = index_max / 10;
 
 void generate_tuple([[maybe_unused]] int64_t coo_index, int64_t &row, int64_t &col, double& value) {
-    static thread_local std::mt19937 generator;
+    static thread_local std::mt19937 generator{std::random_device{}()};
     std::uniform_int_distribution<int64_t> index_distribution(index_min,index_max - 1);
-    std::uniform_real_distribution<double> distribution(0,1e10);
+    std::uniform_real_distribution<double> distribution(0,1);
 
     row = index_distribution(generator);
     col = index_distribution(generator);
@@ -38,11 +38,11 @@ int main(int argc, char **argv) {
     // approximately 25 characters per nnz
     int64_t nnz = bytes / 25;
     fast_matrix_market::write_options options;
-    options.precision = 7;
+    options.precision = 6;
 
     std::ofstream f{std::to_string(megabytes) + "MiB.mtx", std::ios_base::binary};
     fast_matrix_market::write_matrix_market_generated_triplet<int64_t, double>(
-        f, {100000, 100000}, nnz, generate_tuple, options);
+        f, {index_max, index_max}, nnz, generate_tuple, options);
 
     return 0;
 }
