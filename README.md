@@ -7,6 +7,8 @@ Compare I/O of sparse matrix libraries.
   * Matrix Market read
   * proprietary binary write
   * ASCII format write (benchmark disabled by default, see comment in code)
+* [GraphBLAS](https://github.com/DrTimothyAldenDavis/GraphBLAS)
+  * Matrix Market read/write using fast_matrix_market's GraphBLAS binding
 
 Libraries are fetched from their main branches on GitHub. To pin a version modify the appropriate file in [cmake/](cmake).
 
