@@ -33,6 +33,8 @@ using VALUE_TYPE = double;
  */
 static int num_iterations = 1;
 
+static bool delete_written_files_on_finish = true;
+
 /**
  * Directory where benchmarks may write temporary data to.
  */

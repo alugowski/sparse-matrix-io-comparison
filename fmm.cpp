@@ -109,7 +109,9 @@ void FMM_write(benchmark::State& state) {
         benchmark::ClobberMemory();
     }
 
-    std::filesystem::remove(out_path);
+    if (delete_written_files_on_finish) {
+        std::filesystem::remove(out_path);
+    }
     state.SetBytesProcessed((int64_t)num_bytes);
     state.SetLabel("problem_name=" + prob.name);
 }
