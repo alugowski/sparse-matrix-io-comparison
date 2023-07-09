@@ -47,6 +47,9 @@ void BenchmarkArgument(benchmark::internal::Benchmark* b) {
     };
 
     b->ArgsProduct({problem_args, p_args});
+
+    // report times in seconds
+    b->Unit(benchmark::kSecond);
 }
 
 problem& get_problem(int i) {
