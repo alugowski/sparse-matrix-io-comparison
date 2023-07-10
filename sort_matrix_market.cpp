@@ -54,8 +54,10 @@ void sort_file(const std::filesystem::path& in_path, const std::filesystem::path
 
     // Write
     {
+        fmm::write_options options;
+        options.fill_header_field_type = false;
         std::ofstream f(out_path);
-        fmm::write_matrix_market_triplet(f, header, sorted_rows, sorted_cols, sorted_vals);
+        fmm::write_matrix_market_triplet(f, header, sorted_rows, sorted_cols, sorted_vals, options);
     }
 }
 
