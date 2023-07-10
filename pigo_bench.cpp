@@ -47,7 +47,7 @@ static void PIGO_read(benchmark::State& state) {
     state.SetLabel("problem_name=" + prob.name);
 }
 
-BENCHMARK(PIGO_read)->Name("op:read/matrix:Coordinate/format:MatrixMarket/impl:PIGO/lang:C++")->UseRealTime()->Iterations(PIGO_iterations)->Apply(BenchmarkArgument);
+BENCHMARK(PIGO_read)->Name("op:read/impl:PIGO/format:MatrixMarket")->UseRealTime()->Iterations(PIGO_iterations)->Apply(BenchmarkArgument);
 
 /**
  * Write an ASCII file with PIGO.
@@ -79,7 +79,7 @@ static void PIGO_write_binary(benchmark::State& state) {
     state.SetLabel("problem_name=" + prob.name);
 }
 
-BENCHMARK(PIGO_write_binary)->Name("op:write/matrix:Coordinate/format:binary/impl:PIGO/lang:C++")->UseRealTime()->Iterations(PIGO_iterations)->Apply(BenchmarkArgument);
+BENCHMARK(PIGO_write_binary)->Name("op:write/impl:PIGO/format:binary")->UseRealTime()->Iterations(PIGO_iterations)->Apply(BenchmarkArgument);
 
 /**
  * Write an ASCII file with PIGO.
@@ -114,4 +114,4 @@ static void PIGO_write_ascii(benchmark::State& state) {
 // Disabled by default
 // pigo::COO::write uses std::to_string to write values. This method does not paralellize, so this
 // benchmark is very slow on large datasets.
-// BENCHMARK(PIGO_write_ascii)->Name("op:write/matrix:Coordinate/format:ASCII/impl:PIGO/lang:C++")->UseRealTime()->Iterations(PIGO_iterations)->Apply(BenchmarkArgument);
+// BENCHMARK(PIGO_write_ascii)->Name("op:write/impl:PIGO/format:ASCII")->UseRealTime()->Iterations(PIGO_iterations)->Apply(BenchmarkArgument);

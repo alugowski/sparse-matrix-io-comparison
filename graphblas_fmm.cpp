@@ -48,7 +48,7 @@ void GraphBLAS_read_FMM(benchmark::State& state) {
     state.SetLabel("problem_name=" + prob.name);
 }
 
-BENCHMARK(GraphBLAS_read_FMM)->Name("op:read/matrix:Coordinate/format:MatrixMarket/impl:GraphBLAS_FMM/lang:C++")->UseRealTime()->Iterations(num_iterations)->Apply(BenchmarkArgument);
+BENCHMARK(GraphBLAS_read_FMM)->Name("op:read/impl:GraphBLAS_FMM/format:MatrixMarket")->UseRealTime()->Iterations(num_iterations)->Apply(BenchmarkArgument);
 
 /**
  * Write MatrixMarket with fast_matrix_market.
@@ -88,4 +88,4 @@ void GraphBLAS_write_FMM(benchmark::State& state) {
     state.SetLabel("problem_name=" + prob.name);
 }
 
-BENCHMARK(GraphBLAS_write_FMM)->Name("op:write/matrix:Coordinate/format:MatrixMarket/impl:GraphBLAS_FMM/lang:C++")->UseRealTime()->Iterations(num_iterations)->Apply(BenchmarkArgument);
+BENCHMARK(GraphBLAS_write_FMM)->Name("op:write/impl:GraphBLAS_FMM/format:MatrixMarket")->UseRealTime()->Iterations(num_iterations)->Apply(BenchmarkArgument);

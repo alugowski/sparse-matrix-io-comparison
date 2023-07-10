@@ -66,7 +66,7 @@ void FMM_read(benchmark::State& state) {
     state.SetLabel("problem_name=" + prob.name);
 }
 
-BENCHMARK(FMM_read)->Name("op:read/matrix:Coordinate/format:MatrixMarket/impl:FMM/lang:C++")->UseRealTime()->Iterations(num_iterations)->Apply(BenchmarkArgument);
+BENCHMARK(FMM_read)->Name("op:read/impl:FMM/format:MatrixMarket")->UseRealTime()->Iterations(num_iterations)->Apply(BenchmarkArgument);
 
 /**
  * Write MatrixMarket with fast_matrix_market.
@@ -116,4 +116,4 @@ void FMM_write(benchmark::State& state) {
     state.SetLabel("problem_name=" + prob.name);
 }
 
-BENCHMARK(FMM_write)->Name("op:write/matrix:Coordinate/format:MatrixMarket/impl:FMM/lang:C++")->UseRealTime()->Iterations(num_iterations)->Apply(BenchmarkArgument);
+BENCHMARK(FMM_write)->Name("op:write/impl:FMM/format:MatrixMarket")->UseRealTime()->Iterations(num_iterations)->Apply(BenchmarkArgument);
