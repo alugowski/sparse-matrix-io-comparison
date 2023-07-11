@@ -16,7 +16,7 @@ Libraries are fetched from their main branches on GitHub. To pin a version modif
 
 CMake will pull in all dependencies.
 
-Exception is GraphBLAS, its benchmark is skipped if GraphBLAS is not found. Up to you to install that, `brew install suite-sparse` works on macOS.
+Exception is GraphBLAS, its benchmark is skipped if GraphBLAS is not found. Up to you to install GraphBLAS, `brew install suite-sparse` works on macOS.
 
 ```shell
 cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
@@ -49,14 +49,14 @@ build/sort_matrix_market 1024MiB.mtx
 Run all benchmarks:
 ```shell
 build/fmm
-build/pigo_bench
+build/PIGO
 build/graphblas_fmm
 ```
 
 Or use Google Benchmark's filter option to run only some benchmarks:
 ```shell
 build/fmm '--benchmark_filter=.*read.*'
-build/pigo_bench '--benchmark_filter=.*read.*'
+build/PIGO '--benchmark_filter=.*read.*'
 build/graphblas_fmm '--benchmark_filter=.*read.*'
 ```
 
@@ -86,7 +86,7 @@ op:write/impl:FMM/format:MatrixMarket/problem:0/p:8/iterations:1/real_time      
 op:write/impl:FMM/format:MatrixMarket/problem:1/p:8/iterations:1/real_time       1.27 s         0.380 s             1 bytes_per_second=866.261M/s problem_name=1024MiB.sorted.mtx
 ```
 
-#### `pigo_bench`
+#### `PIGO`
 ```
 -------------------------------------------------------------------------------------------------------------------------------------------------------
 Benchmark                                                                                             Time             CPU   Iterations UserCounters...

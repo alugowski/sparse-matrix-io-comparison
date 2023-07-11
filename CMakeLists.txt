@@ -23,8 +23,8 @@ target_link_libraries(fmm benchmark::benchmark fast_matrix_market::fast_matrix_m
 
 # PIGO benchmark
 include(cmake/PIGO.cmake)
-add_executable(pigo_bench bench_main.cpp pigo_bench.cpp bench_common.hpp)
-target_link_libraries(pigo_bench benchmark::benchmark fast_matrix_market::fast_matrix_market pigo)
+add_executable(PIGO bench_main.cpp PIGO.cpp bench_common.hpp)
+target_link_libraries(PIGO benchmark::benchmark fast_matrix_market::fast_matrix_market pigo)
 
 # GraphBLAS
 include(cmake/GraphBLAS.cmake)
