@@ -111,7 +111,8 @@ static void PIGO_write_ascii(benchmark::State& state) {
     state.SetLabel("problem_name=" + prob.name);
 }
 
-// Disabled by default
 // pigo::COO::write uses std::to_string to write values. This method does not paralellize, so this
 // benchmark is very slow on large datasets.
-// BENCHMARK(PIGO_write_ascii)->Name("op:write/impl:PIGO/format:ASCII")->UseRealTime()->Iterations(PIGO_iterations)->Apply(BenchmarkArgument);
+#if ENABLE_SLOW_BENCHMARKS
+BENCHMARK(PIGO_write_ascii)->Name("op:write/impl:PIGO/format:ASCII(MatrixMarket_body_only)")->UseRealTime()->Iterations(PIGO_iterations)->Apply(BenchmarkArgument);
+#endif

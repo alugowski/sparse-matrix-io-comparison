@@ -28,12 +28,27 @@ using INDEX_TYPE = int64_t;
  */
 using VALUE_TYPE = double;
 
+// Options that may want to be configured as switches later
+// Using variables in service of that possible future goal.
+
 /**
  * default number of Google Benchmark iterations to run
  */
 static int num_iterations = 1;
 
+/**
+ * Whether to delete files written by a benchmark.
+ * Set to false to be able to inspect what the benchmark wrote.
+ */
 static bool delete_written_files_on_finish = true;
+
+/**
+ * Some codes are much slower than others. That's ok, but
+ * can make benchmarking very large datasets annoying.
+ */
+#ifndef ENABLE_SLOW_BENCHMARKS
+#define ENABLE_SLOW_BENCHMARKS 1
+#endif
 
 /**
  * Directory where benchmarks may write temporary data to.
