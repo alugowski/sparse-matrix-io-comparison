@@ -77,26 +77,30 @@ M1 Macbook Pro. ARM with 6 performance and 2 efficiency cores.
 
 #### `fmm`
 ```
--------------------------------------------------------------------------------------------------------------------------------------
-Benchmark                                                                           Time             CPU   Iterations UserCounters...
--------------------------------------------------------------------------------------------------------------------------------------
-op:read/impl:FMM/format:MatrixMarket/problem:0/p:8/iterations:1/real_time       0.499 s         0.228 s             1 bytes_per_second=2.00416G/s problem_name=1024MiB.mtx
-op:read/impl:FMM/format:MatrixMarket/problem:1/p:8/iterations:1/real_time       0.497 s         0.219 s             1 bytes_per_second=2.01385G/s problem_name=1024MiB.sorted.mtx
-op:write/impl:FMM/format:MatrixMarket/problem:0/p:8/iterations:1/real_time       1.27 s         0.374 s             1 bytes_per_second=869.828M/s problem_name=1024MiB.mtx
-op:write/impl:FMM/format:MatrixMarket/problem:1/p:8/iterations:1/real_time       1.27 s         0.380 s             1 bytes_per_second=866.261M/s problem_name=1024MiB.sorted.mtx
+----------------------------------------------------------------------------------------------------------------------------------------------
+Benchmark                                                                                    Time             CPU   Iterations UserCounters...
+----------------------------------------------------------------------------------------------------------------------------------------------
+op:read/impl:FMM/format:MatrixMarket/problem:0/p:8/iterations:1/real_time                0.494 s         0.214 s             1 bytes_per_second=2.02622G/s problem_name=1024MiB.mtx
+op:read/impl:FMM/format:MatrixMarket/problem:1/p:8/iterations:1/real_time                0.491 s         0.201 s             1 bytes_per_second=2.03837G/s problem_name=1024MiB.sorted.mtx
+op:write/impl:FMM/format:MatrixMarket/problem:0/p:8/iterations:1/real_time                1.26 s         0.227 s             1 bytes_per_second=876.407M/s problem_name=1024MiB.mtx
+op:write/impl:FMM/format:MatrixMarket/problem:1/p:8/iterations:1/real_time                1.25 s         0.231 s             1 bytes_per_second=877.677M/s problem_name=1024MiB.sorted.mtx
+op:write/impl:FMM/format:MatrixMarket(pattern)/problem:0/p:8/iterations:1/real_time      0.815 s         0.187 s             1 bytes_per_second=804.211M/s problem_name=1024MiB.mtx
+op:write/impl:FMM/format:MatrixMarket(pattern)/problem:1/p:8/iterations:1/real_time      0.824 s         0.185 s             1 bytes_per_second=795.726M/s problem_name=1024MiB.sorted.mtx
 ```
 
 #### `PIGO`
 ```
--------------------------------------------------------------------------------------------------------------------------------------------------------
-Benchmark                                                                                             Time             CPU   Iterations UserCounters...
--------------------------------------------------------------------------------------------------------------------------------------------------------
-op:read/impl:PIGO/format:MatrixMarket/problem:0/p:8/iterations:1/real_time                        0.359 s         0.324 s             1 bytes_per_second=2.78799G/s problem_name=1024MiB.mtx
-op:read/impl:PIGO/format:MatrixMarket/problem:1/p:8/iterations:1/real_time                        0.361 s         0.298 s             1 bytes_per_second=2.77114G/s problem_name=1024MiB.sorted.mtx
-op:write/impl:PIGO/format:binary/problem:0/p:8/iterations:1/real_time                             0.681 s         0.288 s             1 bytes_per_second=1.40955G/s problem_name=1024MiB.mtx
-op:write/impl:PIGO/format:binary/problem:1/p:8/iterations:1/real_time                             0.718 s         0.301 s             1 bytes_per_second=1.337G/s problem_name=1024MiB.sorted.mtx
-op:write/impl:PIGO/format:ASCII(MatrixMarket_body_only)/problem:0/p:8/iterations:1/real_time       16.3 s          14.3 s             1 bytes_per_second=62.9753M/s problem_name=1024MiB.mtx
-op:write/impl:PIGO/format:ASCII(MatrixMarket_body_only)/problem:1/p:8/iterations:1/real_time       16.3 s          14.2 s             1 bytes_per_second=62.9798M/s problem_name=1024MiB.sorted.mtx
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Benchmark                                                                                                      Time             CPU   Iterations UserCounters...
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+op:read/impl:PIGO/format:MatrixMarket/problem:0/p:8/iterations:1/real_time                                 0.351 s         0.314 s             1 bytes_per_second=2.84972G/s problem_name=1024MiB.mtx
+op:read/impl:PIGO/format:MatrixMarket/problem:1/p:8/iterations:1/real_time                                 0.391 s         0.299 s             1 bytes_per_second=2.55914G/s problem_name=1024MiB.sorted.mtx
+op:write/impl:PIGO/format:binary/problem:0/p:8/iterations:1/real_time                                      0.922 s         0.356 s             1 bytes_per_second=1066.59M/s problem_name=1024MiB.mtx
+op:write/impl:PIGO/format:binary/problem:1/p:8/iterations:1/real_time                                      0.718 s         0.306 s             1 bytes_per_second=1.33625G/s problem_name=1024MiB.sorted.mtx
+op:write/impl:PIGO/format:ASCII(MatrixMarket_body_only)/problem:0/p:8/iterations:1/real_time                16.4 s          14.8 s             1 bytes_per_second=62.5738M/s problem_name=1024MiB.mtx
+op:write/impl:PIGO/format:ASCII(MatrixMarket_body_only)/problem:1/p:8/iterations:1/real_time                16.4 s          14.8 s             1 bytes_per_second=62.4265M/s problem_name=1024MiB.sorted.mtx
+op:write/impl:PIGO/format:ASCII(MatrixMarket_body_only(pattern))/problem:0/p:8/iterations:1/real_time      0.604 s         0.316 s             1 bytes_per_second=1085.65M/s problem_name=1024MiB.mtx
+op:write/impl:PIGO/format:ASCII(MatrixMarket_body_only(pattern))/problem:1/p:8/iterations:1/real_time      0.587 s         0.337 s             1 bytes_per_second=1116.13M/s problem_name=1024MiB.sorted.mtx
 ```
 
 #### `graphblas_fmm`
