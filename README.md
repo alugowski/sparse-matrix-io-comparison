@@ -113,3 +113,14 @@ op:read/impl:GraphBLAS_FMM/format:MatrixMarket/problem:1/p:8/iterations:1/real_t
 op:write/impl:GraphBLAS_FMM/format:MatrixMarket/problem:0/p:8/iterations:1/real_time       1.27 s         0.200 s             1 bytes_per_second=864.388M/s problem_name=1024MiB.mtx
 op:write/impl:GraphBLAS_FMM/format:MatrixMarket/problem:1/p:8/iterations:1/real_time       1.16 s         0.206 s             1 bytes_per_second=951.295M/s problem_name=1024MiB.sorted.mtx
 ```
+
+#### `bench_lagraph`
+```
+-----------------------------------------------------------------------------------------------------------------------------------------
+Benchmark                                                                               Time             CPU   Iterations UserCounters...
+-----------------------------------------------------------------------------------------------------------------------------------------
+op:read/impl:LAGraph/format:MatrixMarket/problem:0/p:8/iterations:1/real_time        18.4 s          18.1 s             1 bytes_per_second=55.5359M/s problem_name=1024MiB.mtx
+op:read/impl:LAGraph/format:MatrixMarket/problem:1/p:8/iterations:1/real_time        12.0 s          12.0 s             1 bytes_per_second=85.0187M/s problem_name=1024MiB.sorted.mtx
+op:write/impl:LAGraph/format:MatrixMarket/problem:0/p:8/iterations:1/real_time       26.1 s          25.5 s             1 bytes_per_second=37.6224M/s problem_name=1024MiB.mtx
+op:write/impl:LAGraph/format:MatrixMarket/problem:1/p:8/iterations:1/real_time       26.3 s          25.4 s             1 bytes_per_second=37.3481M/s problem_name=1024MiB.sorted.mtx
+```

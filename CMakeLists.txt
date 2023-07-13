@@ -43,6 +43,22 @@ if (GraphBLAS_FOUND)
     endif()
     target_link_libraries(graphblas_fmm benchmark::benchmark fast_matrix_market::fast_matrix_market ${GRAPHBLAS_LIBRARIES})
 
+
+    # LAGraph
+    if (EXISTS "${CMAKE_SOURCE_DIR}/lagraph_lib/LAGraph/build")
+        message("Found LAGraph, configuring bench_lagraph")
+
+        add_executable(bench_lagraph bench_main.cpp bench_lagraph.cpp bench_common.hpp)
+        if (NOT ("${GRAPHBLAS_INCLUDE_DIR}" STREQUAL "" ))
+            target_include_directories(bench_lagraph PUBLIC ${GRAPHBLAS_INCLUDE_DIR})
+        endif()
+        target_link_directories(bench_lagraph PUBLIC "${CMAKE_SOURCE_DIR}/lagraph_lib/LAGraph/build")
+        target_include_directories(bench_lagraph PUBLIC "${CMAKE_SOURCE_DIR}/lagraph_lib/LAGraph/include")
+        target_link_libraries(bench_lagraph benchmark::benchmark fast_matrix_market::fast_matrix_market ${GRAPHBLAS_LIBRARIES} "lagraph")
+    else()
+        message("Skipping bench_lagraph because LAGraph cannot be fetched automatically by CMake.")
+        message("Please run lagraph_lib/get_lagraph.sh to build LAGraph, then rerun cmake to build bench_lagraph.")
+    endif()
 else()
     message("GraphBLAS not found, skipping GraphBLAS benchmarks.")
 endif()
