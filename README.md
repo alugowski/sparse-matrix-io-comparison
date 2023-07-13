@@ -73,9 +73,9 @@ This normalized value is very informative:
 
 ### Example results
 
-M1 Macbook Pro. ARM with 6 performance and 2 efficiency cores.
+M1 Macbook Pro with 16 GB RAM, 6 performance and 2 efficiency cores (ARM).
 
-#### `fmm`
+#### `bench_fmm`
 ```
 ----------------------------------------------------------------------------------------------------------------------------------------------
 Benchmark                                                                                    Time             CPU   Iterations UserCounters...
@@ -88,7 +88,7 @@ op:write/impl:FMM/format:MatrixMarket(pattern)/problem:0/p:8/iterations:1/real_t
 op:write/impl:FMM/format:MatrixMarket(pattern)/problem:1/p:8/iterations:1/real_time      0.824 s         0.185 s             1 bytes_per_second=795.726M/s problem_name=1024MiB.sorted.mtx
 ```
 
-#### `PIGO`
+#### `bench_pigo`
 ```
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 Benchmark                                                                                                      Time             CPU   Iterations UserCounters...
@@ -103,7 +103,7 @@ op:write/impl:PIGO/format:ASCII(MatrixMarket_body_only(pattern))/problem:0/p:8/i
 op:write/impl:PIGO/format:ASCII(MatrixMarket_body_only(pattern))/problem:1/p:8/iterations:1/real_time      0.587 s         0.337 s             1 bytes_per_second=1116.13M/s problem_name=1024MiB.sorted.mtx
 ```
 
-#### `graphblas_fmm`
+#### `bench_graphblas_fmm`
 ```
 -----------------------------------------------------------------------------------------------------------------------------------------------
 Benchmark                                                                                     Time             CPU   Iterations UserCounters...

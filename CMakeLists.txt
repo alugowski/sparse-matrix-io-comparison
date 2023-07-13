@@ -18,13 +18,13 @@ add_executable(sort_matrix_market sort_matrix_market.cpp)
 target_link_libraries(sort_matrix_market fast_matrix_market::fast_matrix_market)
 
 # fast_matrix_market benchmark
-add_executable(fmm bench_main.cpp fmm.cpp bench_common.hpp)
-target_link_libraries(fmm benchmark::benchmark fast_matrix_market::fast_matrix_market)
+add_executable(bench_fmm main.cpp bench_fmm.cpp common.hpp)
+target_link_libraries(bench_fmm benchmark::benchmark fast_matrix_market::fast_matrix_market)
 
 # PIGO benchmark
 include(cmake/PIGO.cmake)
-add_executable(PIGO bench_main.cpp PIGO.cpp bench_common.hpp)
-target_link_libraries(PIGO benchmark::benchmark fast_matrix_market::fast_matrix_market pigo)
+add_executable(bench_pigo main.cpp bench_pigo.cpp common.hpp)
+target_link_libraries(bench_pigo benchmark::benchmark fast_matrix_market::fast_matrix_market pigo)
 
 # GraphBLAS
 include(cmake/GraphBLAS.cmake)
@@ -37,18 +37,18 @@ if (GraphBLAS_FOUND)
     message("GRAPHBLAS_LIBRARY: ${GRAPHBLAS_LIBRARY}")
 
     # GraphBLAS fast_matrix_market bindings benchmark
-    add_executable(graphblas_fmm bench_main.cpp graphblas_fmm.cpp bench_common.hpp)
+    add_executable(bench_graphblas_fmm main.cpp bench_graphblas_fmm.cpp common.hpp)
     if (NOT ("${GRAPHBLAS_INCLUDE_DIR}" STREQUAL "" ))
-        target_include_directories(graphblas_fmm PUBLIC ${GRAPHBLAS_INCLUDE_DIR})
+        target_include_directories(bench_graphblas_fmm PUBLIC ${GRAPHBLAS_INCLUDE_DIR})
     endif()
-    target_link_libraries(graphblas_fmm benchmark::benchmark fast_matrix_market::fast_matrix_market ${GRAPHBLAS_LIBRARIES})
+    target_link_libraries(bench_graphblas_fmm benchmark::benchmark fast_matrix_market::fast_matrix_market ${GRAPHBLAS_LIBRARIES})
 
 
     # LAGraph
     if (EXISTS "${CMAKE_SOURCE_DIR}/lagraph_lib/LAGraph/build")
         message("Found LAGraph, configuring bench_lagraph")
 
-        add_executable(bench_lagraph bench_main.cpp bench_lagraph.cpp bench_common.hpp)
+        add_executable(bench_lagraph main.cpp bench_lagraph.cpp common.hpp)
         if (NOT ("${GRAPHBLAS_INCLUDE_DIR}" STREQUAL "" ))
             target_include_directories(bench_lagraph PUBLIC ${GRAPHBLAS_INCLUDE_DIR})
         endif()

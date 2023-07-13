@@ -5,7 +5,7 @@
 #include <numeric>
 #include <mutex>
 #include <thread>
-#include "bench_common.hpp"
+#include "common.hpp"
 
 namespace fs = std::filesystem;
 
