@@ -26,6 +26,15 @@ include(cmake/PIGO.cmake)
 add_executable(bench_pigo main.cpp bench_pigo.cpp common.hpp)
 target_link_libraries(bench_pigo benchmark::benchmark fast_matrix_market::fast_matrix_market pigo)
 
+# Eigen benchmark
+include(cmake/Eigen.cmake)
+find_package (Eigen3 3.4 REQUIRED NO_MODULE)
+add_executable(bench_eigen main.cpp bench_eigen.cpp common.hpp)
+target_link_libraries(bench_eigen benchmark::benchmark fast_matrix_market::fast_matrix_market Eigen3::Eigen)
+
+add_executable(bench_eigen_fmm main.cpp bench_eigen_fmm.cpp common.hpp)
+target_link_libraries(bench_eigen_fmm benchmark::benchmark fast_matrix_market::fast_matrix_market Eigen3::Eigen)
+
 # GraphBLAS
 include(cmake/GraphBLAS.cmake)
 
