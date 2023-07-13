@@ -10,7 +10,7 @@ Some intentionally include matrix construction time. These timings can be affect
   * proprietary binary write
   * ASCII format write (like Matrix Market body only)
 * [GraphBLAS](https://github.com/DrTimothyAldenDavis/GraphBLAS)
-  * ***Includes matrix construction time***
+  * ***Reads include matrix construction time***
   * Matrix Market read/write using fast_matrix_market's GraphBLAS binding. This includes matrix construction time, which highly depends on whether values are already sorted or not.
 * [LAGraph](https://github.com/GraphBLAS/LAGraph)
   * ***Reads include matrix construction time***
