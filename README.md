@@ -19,11 +19,16 @@ Some intentionally include matrix construction time. These timings can be affect
   * ***Reads include matrix construction time***
   * Matrix Market read/write (library native)
   * Matrix Market read/write using fast_matrix_market's Eigen binding.
+* [Polars](https://www.pola.rs/)
+  * Parquet read/write
+* [Pandas](https://pandas.pydata.org/)
+  * Parquet read/write
 
 Libraries are fetched from their main branches on GitHub. To pin a version modify the appropriate file in [cmake/](cmake).
 
 # Build
 
+## C++ libraries
 CMake will pull in all dependencies.
 
 Exception is GraphBLAS, its benchmark is skipped if GraphBLAS is not found. Up to you to install GraphBLAS, `brew install suite-sparse` works on macOS.
@@ -34,6 +39,13 @@ cmake --build build --config Release
 ```
 
 builds everything into the `build` subdirectory.
+
+## Python libraries
+
+In a virtual environment:
+```shell
+pip install -r requirements.txt
+```
 
 # Datafiles
 
@@ -186,4 +198,26 @@ op:read/impl:Eigen_FMM/format:MatrixMarket/problem:0/p:8/iterations:1/real_time 
 op:read/impl:Eigen_FMM/format:MatrixMarket/problem:1/p:8/iterations:1/real_time        1.83 s          1.61 s             1 bytes_per_second=558.58M/s problem_name=1024MiB.sorted.mtx
 op:write/impl:Eigen_FMM/format:MatrixMarket/problem:0/p:8/iterations:1/real_time       1.36 s          1.18 s             1 bytes_per_second=808.776M/s problem_name=1024MiB.mtx
 op:write/impl:Eigen_FMM/format:MatrixMarket/problem:1/p:8/iterations:1/real_time       1.35 s          1.19 s             1 bytes_per_second=816.8M/s problem_name=1024MiB.sorted.mtx
+```
+
+### Polars
+
+`python bench_polars.py`
+```
+-----------------------------------------------------------------------------------------------------------------------
+Benchmark                                                             Time             CPU   Iterations UserCounters...
+-----------------------------------------------------------------------------------------------------------------------
+op:read/impl:Polars/format:Parquet/0/iterations:1/real_time       0.272 s         0.003 s             1 1024MiB.mtx=0 MM_equivalent_bytes_per_second=3.94835G/s bytes_per_second=1.97559G/s
+op:read/impl:Polars/format:Parquet/1/iterations:1/real_time       0.208 s         0.002 s             1 1024MiB.sorted.mtx=1 MM_equivalent_bytes_per_second=5.16654G/s bytes_per_second=1.99667G/s
+op:write/impl:Polars/format:Parquet/0/iterations:1/real_time       2.75 s          2.73 s             1 1024MiB.mtx=0 MM_equivalent_bytes_per_second=390.834M/s bytes_per_second=200.25M/s
+op:write/impl:Polars/format:Parquet/1/iterations:1/real_time       2.70 s          2.69 s             1 1024MiB.sorted.mtx=1 MM_equivalent_bytes_per_second=398.328M/s bytes_per_second=157.633M/s
+```
+
+10GiB file (note machine has 16GiB RAM):
+```
+-----------------------------------------------------------------------------------------------------------------------
+Benchmark                                                             Time             CPU   Iterations UserCounters...
+-----------------------------------------------------------------------------------------------------------------------
+op:read/impl:Polars/format:Parquet/0/iterations:1/real_time        27.7 s         0.053 s             1 10240MiB.mtx=0 MM_equivalent_bytes_per_second=387.431M/s bytes_per_second=198.52M/s
+op:write/impl:Polars/format:Parquet/0/iterations:1/real_time       37.3 s          30.0 s             1 10240MiB.mtx=0 MM_equivalent_bytes_per_second=287.603M/s bytes_per_second=147.368M/s
 ```

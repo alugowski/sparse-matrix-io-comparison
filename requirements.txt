@@ -1,0 +1,7 @@
+google-benchmark
+fast_matrix_market
+scipy
+polars
+pandas
+pyarrow
+fastparquet
