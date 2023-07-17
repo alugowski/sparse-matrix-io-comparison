@@ -15,7 +15,7 @@ from common import *
 @benchmark.register(name="op:read/impl:Polars/format:Parquet")
 @benchmark.option.use_real_time()
 @benchmark.option.unit(benchmark.kSecond)
-@benchmark.option.range(0, get_num_problems() - 1)
+@benchmark.option.dense_range(0, get_num_problems() - 1, step=1)
 @benchmark.option.iterations(num_iterations)
 def polars_read_parquet(state):
     prob = get_problem(state.range(0))
@@ -45,7 +45,7 @@ def polars_read_parquet(state):
 @benchmark.register(name="op:write/impl:Polars/format:Parquet")
 @benchmark.option.use_real_time()
 @benchmark.option.unit(benchmark.kSecond)
-@benchmark.option.range(0, get_num_problems()-1)
+@benchmark.option.dense_range(0, get_num_problems()-1, step=1)
 @benchmark.option.iterations(num_iterations)
 def polars_write_parquet(state):
     prob = get_problem(state.range(0))
