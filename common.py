@@ -15,7 +15,7 @@ delete_written_files_on_finish = True
 def _load_problems():
     global problems
 
-    for mtx in problem_dir.glob("*.mtx"):
+    for mtx in sorted(problem_dir.glob("*.mtx"), key=lambda f: f.name):
         problems.append(dict(name=mtx.name, mm_path=mtx))
 
     for i, prob in enumerate(problems):

@@ -2,6 +2,7 @@
 // Use of this source code is governed by the BSD 2-clause license found in the LICENSE.txt file.
 // SPDX-License-Identifier: BSD-2-Clause
 
+#include <algorithm>
 #include <numeric>
 #include <mutex>
 #include <thread>
@@ -20,6 +21,10 @@ void load_problems(const fs::path& dir, std::vector<problem>& ret) {
         p.mm_path = entry.path();
         ret.push_back(p);
     }
+
+    std::sort(ret.begin(), ret.end(), [](const problem& a, const problem& b) {
+        return a.name < b.name;
+    });
 }
 
 void create_problems(std::vector<problem>& ret) {
